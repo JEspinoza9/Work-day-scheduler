@@ -2,25 +2,25 @@ var today = moment();
 $("#currentDay").text(today.format("MMM Do, YYYY , hh:mm:ss a"));
 
 $(document).ready(function () {
-    // saveBtn click listener 
+    // event listener for save button that saves to local storage
     $(".btn").on("click", function () {
-        // Get nearby values of the description in JQuery
+        // variables for time and input on the time block
         var text = $(this).siblings(" .input").val();
         var time = $(this).parent().attr("id");
 
-        // Save text in local storage
+        // save input into local storage 
         localStorage.setItem(time, text);
     })
    
     function timeTracker() {
-        //get current number of hours.
+        //get the current time to check time blocks 
         var timeNow = moment().hour();
 
         // loop over time blocks
         $(".time-block").each(function () {
             var blockTime = parseInt($(this).attr("id").split("hour")[1]);
 
-            // To check the time and add the classes for background indicators
+            // changes background color based on whether the time has passed, its the current time, or the time hasnt passed yet 
             if (blockTime < timeNow) {
                 $(this).removeClass("future");
                 $(this).removeClass("present");
@@ -40,7 +40,7 @@ $(document).ready(function () {
         })
     }
 
-    // Get item from local storage if any
+    // recall local storage for user input 
     $("#hour9   .input").val(localStorage.getItem("hour9"));
     $("#hour10  .input").val(localStorage.getItem("hour10"));
     $("#hour11  .input").val(localStorage.getItem("hour11"));
